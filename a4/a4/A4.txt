@@ -1,0 +1,91 @@
+CISC/CMPE 454 Assignment 4
+Due April 1 before class
+
+You are to modify a fragment shader to trace rays through a volume,
+incorporating refraction and internal reflection, as well as the usual
+DRR attenuation.
+
+You need to make changes to only the trace.frag fragment shader.  You
+can, optionally, modify genpvm.cpp to generate your own refractive
+volumes.
+
+Do not do the following tasks in order.  Choose an order where you can
+complete one task and *test* it, then complete another task and *test*
+it.  If you do not do this, debugging will be extremely difficult.
+
+Part 0
+
+  Get the C++ code compiling.  It's best to use the CasLab Linux
+  machines in Goodwin 248.  Run the code with a small volume, such as
+  Hydrogren.pvm.  The PVM volume files are available separately on the
+  course web site.
+
+Part 1
+
+  Modify the main() function.
+
+  [1 point] Determine the fragment position and initial direction in
+  the WCS (world coordinate system).  Determine the initial direction
+  in the TCS (i.e. the texture coordinate system of the volume).
+
+  [1 point] Accumulate the total transparency as the ray passes
+  through the volume.  Modulate the output colour by this
+  transparency.  (Test this by pressing '3'.)
+
+  [1 point] In the loop, look up the next gradient and density.  Find
+  the next direction by calling the refractionOrReflectionDirection()
+  function with the appropriate arguments.
+
+  [1 point] In the loop, advance to the next position according to the
+  commentted instructions in the code.
+
+  [1 point] In the loop, quit iterating if you have exited the volume.
+
+  [1 point] After the loop, determine the exit position and direction
+  of the ray in the WCS, and call the lookupBackgroundTexture()
+  function with the appropriate arguments to find the colour that is
+  visible from that point and direction.  Return the colour, modulated
+  by the accumulated transparency.
+
+Part 2
+
+  Modify the refractionOrReflectionDirection() function.
+
+  [1 point] Determine whether there's refraction or internal reflection.
+
+  [1 point] Compute the new direction.
+
+Part 3
+
+  Modify the lookupBackgroundTexture() function.
+
+  [1 point] Find the ray/plane intersection point in the WCS.
+
+  [1 point] Determine whether the intersection point is inside or
+  outside the texture.
+
+  [1 point] Return the texture colour at the intersection point.
+
+To Hand In
+
+  10% of the maximum mark will be deducted if these instructions are
+  not followed exactly.
+
+  Make a directory called 'a4-AAAAAAAA-BBBBBBBB where AAAAAAAA and
+  BBBBBBBB are your student numbers.  In that directory, put
+
+    - your modified trace.frag shader file
+
+    - a README.txt file with your name(s), student number(s) again,
+      and email address(es).  Include here any comments you have for
+      the TA.
+
+    - Two screen captured images of your program output: one of the
+      Hydrogen and one of the Lens.  You may include other images if
+      you implemented extra features and want to demonstrate those.
+
+    - Do not include the C++ source code.  You do not have to modify
+      the C++ source code.
+
+  Create a ZIP archive of the a4-AAAAAAAA-BBBBBBBB directory and email
+  it to stratius@gmail.com .
